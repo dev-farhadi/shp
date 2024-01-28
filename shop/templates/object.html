@@ -5,10 +5,10 @@
     <link href='https://fonts.googleapis.com/css?family=Bangers' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>object</title>
 </head>
 <style>
-    body {font-family: 'Bangers';font-size: 22px;}
+        body {font-family: 'Bangers';font-size: 22px;}
 
 .topnav {
   overflow: hidden;
@@ -122,26 +122,20 @@
         <a style="float: right;" href="{%url 'signup'%}">Signup</a>
 
       </div>
+    
       <div style="display: flex; justify-content: center; ">
-        {% for obj in page_obj %}
-        <div class="object" style="border-radius: 1rem; width: 20%; color:white; background-color: rgb(115, 56, 115); margin: 2rem; display: flex;justify-content: center; flex-direction: column; padding: 2rem; align-items: center;">
+        {% for obj in object %}
+        <div class="object" style="border-radius: 1rem; width: 70%; color:white; background-color: rgb(115, 56, 115); margin: 2rem; display: flex;justify-content: center; flex-direction: column; padding: 2rem; align-items: center; font-size: xx-large;">
             <h3>{{obj.name}}</h3>
-            <h5>{{obj.category}}</h5>
+            <h6>{{obj.description}}</h6>
+            <h5 style="opacity: 0.5;">{{obj.category}}</h5>
             <a>{{obj.price}}$</a>
-            <a style="padding: 1rem; text-decoration: none; color: white; background-color: #333; margin-top: 1rem; border-radius: 1.5rem;" href="{%url 'object' obj.id%}">Show</a>
+            <a style="padding: 1rem; text-decoration: none; color: white; background-color: #333; margin-top: 1rem; border-radius: 1.5rem;" href="{%url 'object' obj.id%}">Add To Basket</a>
 
         </div>
         {% empty %}
         <h1>Not Found.</h1>
         {% endfor %}
       </div>
-      <div class="pagination">
-        {% if page_obj.has_previous %}
-            <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
-        {% endif %}
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">Next</a>
-        {% endif %}
-    </div>
 </body>
 </html>
