@@ -1,4 +1,6 @@
 from django.db import models
+from django.conf import settings
+from django.contrib.auth.models import User
 
 
 class Type_Object(models.Model):
@@ -25,6 +27,12 @@ class Object(models.Model):
 
     def __str__(self):
         return str(self.name)
+    
+class Object_User(models.Model):
+    object_id = models.ForeignKey(Object, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
 
 
 
