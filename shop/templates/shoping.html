@@ -2,34 +2,143 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Bangers' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shoping card</title>
 </head>
+<style>
+            body {font-family: 'Bangers';font-size: 22px;}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+  border-radius: 2rem;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+
+.topnav .icon {
+  display: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 17px;    
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: rgb(172, 110, 172);
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 1rem;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.topnav a:hover, .dropdown:hover .dropbtn {
+  background-color: #555;
+  color: white;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.home{
+ width:6rem;
+ background-color: rgb(172, 110, 172) ;
+}
+</style>
 <body>
+    <div class="topnav" id="myTopnav">
+        <a class="home" href="{%url 'home'%}">Home</a>
+        <div class="dropdown">
+          <button class="dropbtn">Digital
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="{% url 'child' param='mobile' %}">Mobile</a>
+            <a href="{% url 'child' param='labtop' %}">Labtop</a>
+          </div>
+        </div> 
+        <div class="dropdown">
+            <button class="dropbtn">Wear 
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="{% url 'child' param='shoe' %}">Shoe</a>
+              <a href="{% url 'child' param='Shirt' %}">Shirt</a>
+              <a href="{% url 'child' param='Pants' %}">Pants</a>
+            </div>
+          </div> 
+          <div class="dropdown">
+            <button class="dropbtn">Home appliances 
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="{% url 'child' param='TV' %}">TV</a>
+            </div>
+          </div> 
+        {% if user.is_authenticated %}
+        <a style="float: right; background-color: rgb(115, 56, 115);" href="{%url 'logout'%}">Logout</a>
+        {% else %}
+        <a style="float: right; background-color: rgb(115, 56, 115);" href="{%url 'login'%}">Login</a>
+        {% endif %}
+        <a style="float: right;" href="{%url 'signup'%}">Signup</a>
+
+      </div>
     <h1>Shopping Cart</h1>
 
 {% if shop_item %}
-  <table>
-    <thead>
-      <tr>
-        <th>Product</th>
-        <th>Quantity</th>
-        <th>User</th>
-        <th>Price</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for shop in shop_item %}
-        <tr>
-          <td>{{ shop.object_id }}</td>
-          <td>{{ shop.quantity }}</td>
-          <td>{{ shop.user_id }}</td>
-          <td>{{shop.object_id.price}}</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-<p>Total: {{ shop.object_id.price }}</p>
+<div style="display: flex; align-items: center; align-items: center; justify-content: center; flex-wrap: wrap;">
+    {% for shop in shop_item %}
+    <div style="background-color: rgb(172, 110, 172); padding: 2rem;margin: 2rem; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 10px solid black;">
+    <h2>{{shop.object_id.name}}</h2>
+    <h2>{{shop.quantity}}</h2>
+    <h2>${{shop.object_id.price}}</h2>
+    <a href="{%url 'delete_item' param=shop.id%}" style="color: black; text-decoration: none; background-color: rgb(255, 82, 82); padding: 0.5rem; border-radius: 1rem; cursor: pointer;">&#x2716;</a>
+    </div>
+    
+
+    {%endfor%}
+</div>
+<a href="{%url 'delete'%}" style="font-size: larger; border: none; padding: 1rem; text-decoration: none; color: rgb(248, 59, 59); background-color: #333;">Delete All</a>
+<a href="" style="font-size: larger; border: none; padding: 1rem; text-decoration: none;color: white;background-color: #333;">payment</a>
   
 {% else %}
   <p>Your cart is empty.</p>

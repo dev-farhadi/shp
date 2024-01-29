@@ -1,8 +1,7 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render
 from django.core.paginator import Paginator
-from .models import Object, Object_User
+from .models import Object, Product_list
 from django.contrib.auth.decorators import login_required
-from .forms import AddToCartForm
 # Create your views here.
 def home(request):
     object = Object.objects.order_by('-id')[:5]
@@ -24,9 +23,19 @@ def child_obj(request,param):
 
 @login_required
 def shoping(request, obj_id):
-    shop_item = Object_User.objects.filter(user_id__id=request.user.id)
+    shop_item = Product_list.objects.filter(user_id__id=request.user.id)
     if request.method == 'POST':
         quantity = request.POST.get('quantity')
-        userobject = Object_User(object_id_id=obj_id, quantity=quantity, user_id=request.user)
+        userobject = Product_list(object_id_id=obj_id, quantity=quantity, user_id=request.user)
         userobject.save()
         return render(request, 'shoping.html', {'shop_item': shop_item})
+    
+def delete_item(request, param):
+    deleted = Product_list.objects.filter(id=param).delete()
+    shop_item = Product_list.objects.all()
+    return render(request, 'shoping.html', {'shop_item' : shop_item})
+
+def delete(request):
+    delete = Product_list.objects.all().delete()
+    return render(request, 'shoping.html')
+

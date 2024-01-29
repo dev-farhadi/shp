@@ -28,7 +28,8 @@ class Object(models.Model):
     def __str__(self):
         return str(self.name)
     
-class Object_User(models.Model):
+class Product_list(models.Model):
+    id = models.BigAutoField(primary_key=True)
     object_id = models.ForeignKey(Object, on_delete=models.CASCADE)
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
