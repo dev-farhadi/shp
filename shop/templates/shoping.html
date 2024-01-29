@@ -120,6 +120,7 @@
         <a style="float: right; background-color: rgb(115, 56, 115);" href="{%url 'login'%}">Login</a>
         {% endif %}
         <a style="float: right;" href="{%url 'signup'%}">Signup</a>
+        <a href="{%url 'shopping' %}" style="float: right; cursor: pointer; height: 1rem;" >&#128717</a>
 
       </div>
     <h1>Shopping Cart</h1>
@@ -127,7 +128,7 @@
 {% if shop_item %}
 <div style="display: flex; align-items: center; align-items: center; justify-content: center; flex-wrap: wrap;">
     {% for shop in shop_item %}
-    <div style="background-color: rgb(172, 110, 172); padding: 2rem;margin: 2rem; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 10px solid black;">
+    <div style="width: 10rem; background-color: rgb(172, 110, 172); padding: 2rem;margin: 2rem; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 10px solid black;">
     <h2>{{shop.object_id.name}}</h2>
     <h2>{{shop.quantity}}</h2>
     <h2>${{shop.object_id.price}}</h2>
