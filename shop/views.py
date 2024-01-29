@@ -24,11 +24,9 @@ def child_obj(request,param):
 
 @login_required
 def shoping(request, obj_id):
-    shop_item = Object_User.objects.filter(user_id=request.user.id)
+    shop_item = Object_User.objects.filter(user_id__id=request.user.id)
     if request.method == 'POST':
-        form = AddToCartForm(request.POST)
-        if form.is_valid():
-            quantity = form.cleaned_data['quantity']
-            userobject = Object_User(object_id=obj_id, quantity=quantity, user_id=request.user.id)
-            userobject.save()
+        quantity = request.POST.get('quantity')
+        userobject = Object_User(object_id_id=obj_id, quantity=quantity, user_id=request.user)
+        userobject.save()
         return render(request, 'shoping.html', {'shop_item': shop_item})

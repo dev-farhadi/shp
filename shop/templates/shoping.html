@@ -14,6 +14,7 @@
       <tr>
         <th>Product</th>
         <th>Quantity</th>
+        <th>User</th>
         <th>Price</th>
       </tr>
     </thead>
@@ -23,12 +24,13 @@
           <td>{{ shop.object_id }}</td>
           <td>{{ shop.quantity }}</td>
           <td>{{ shop.user_id }}</td>
+          <td>{{shop.object_id.price}}</td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
-
-  <p>Total: {{ shop|length }}</p>
+<p>Total: {{ shop.object_id.price }}</p>
+  
 {% else %}
   <p>Your cart is empty.</p>
 {% endif %}

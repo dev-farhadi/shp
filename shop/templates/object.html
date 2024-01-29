@@ -133,7 +133,7 @@
             <form method="POST" action="{% url 'shoping' obj.id %}" style="display: flex; justify-content: center; align-items: center; padding: 1rem;">
                 {% csrf_token %}
                 <label style="padding: 1rem;" for="id_quantity">Quantity:</label>
-                {{form.as_p}}
+                <input style="font-family: 'Bangers'; padding: 0.5rem; border-radius: 1rem; font-size: larger; width: 3rem; border: none;" type="number" id="id_quantity" name="quantity" min="1" value="1">
                 <button style="font-family: 'Bangers';font-size: 22px; margin-bottom: 1rem; margin-left: 1rem; border: none; cursor: pointer; padding: 1rem; text-decoration: none; color: white; background-color: #333; margin-top: 1rem; border-radius: 1.5rem;" type="submit">Add to Cart</button>
               </form>
         </div>
