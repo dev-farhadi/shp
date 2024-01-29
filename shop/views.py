@@ -39,3 +39,6 @@ def delete(request):
     delete = Product_list.objects.all().delete()
     return render(request, 'shoping.html')
 
+def payment(request):
+    return render(request, 'payment.html')
+
