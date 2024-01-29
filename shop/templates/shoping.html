@@ -6,6 +6,31 @@
     <title>Shoping card</title>
 </head>
 <body>
-    shoping
+    <h1>Shopping Cart</h1>
+
+{% if shop_item %}
+  <table>
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for shop in shop_item %}
+        <tr>
+          <td>{{ shop.object_id }}</td>
+          <td>{{ shop.quantity }}</td>
+          <td>{{ shop.user_id }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <p>Total: {{ shop|length }}</p>
+{% else %}
+  <p>Your cart is empty.</p>
+{% endif %}
 </body>
 </html>
