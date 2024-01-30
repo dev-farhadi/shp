@@ -6,10 +6,10 @@
     <link href='https://fonts.googleapis.com/css?family=Bangers' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>object</title>
+    <title>Home</title>
 </head>
 <style>
-        body {font-family: 'Bangers';font-size: 22px;}
+    body {font-family: 'Bangers';font-size: 22px;}
 
 .topnav {
   overflow: hidden;
@@ -124,40 +124,5 @@
         <a href="{%url 'shopping' %}" style="float: right; cursor: pointer; height: 1rem;" >&#128717</a>
 
       </div>
-    
-      <div style="display: flex; justify-content: center; ">
-        {% for obj in object %}
-        <div class="object" style="border-radius: 1rem; width: 70%; color:white; background-color: rgb(115, 56, 115); margin: 2rem; display: flex;justify-content: center; flex-direction: column; padding: 2rem; align-items: center; font-size: xx-large;">
-            <h3>{{obj.name}}</h3>
-            <h6>{{obj.description}}</h6>
-            <h5 style="opacity: 0.5;">{{obj.category}}</h5>
-            <a>{{obj.price}}$</a>
-                <button id="add_cart" value="{{obj.id}}" style="font-family: 'Bangers';font-size: 22px; margin-bottom: 1rem; margin-left: 1rem; border: none; cursor: pointer; padding: 1rem; text-decoration: none; color: white; background-color: #333; margin-top: 1rem; border-radius: 1.5rem;" type="button">Add to Cart</button>
-        </div>
-        {% empty %}
-        <h1>Not Found.</h1>
-        {% endfor %}
-
-      </div>
-      <script>
-  $(document).on('click', '#add_cart', function(e) {
-    e.preventDefault()
-    $.ajax({
-      type: 'POST',
-      url: '{% url 'cart_add' %}',
-      data:{
-        obj_id: $('#add_cart').val(),
-        csrfmiddlewaretoken: '{{csrf_token}}',
-        action: 'post'
-      },
-      success: function(json){
-        console.log(json)
-      },
-      error: function(xhr, errmsg,err){
-      }
-    })
-  })
-</script>
 </body>
-
 </html>

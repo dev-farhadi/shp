@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.core.paginator import Paginator
 from .models import Object, Product_list
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 # Create your views here.
 def home(request):
     object = Object.objects.order_by('-id')[:5]
@@ -55,4 +56,5 @@ def delete(request):
 @login_required
 def payment(request):
     return render(request, 'payment.html')
+
 
