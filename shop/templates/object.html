@@ -121,7 +121,9 @@
         <a style="float: right; background-color: rgb(115, 56, 115);" href="{%url 'login'%}">Login</a>
         {% endif %}
         <a style="float: right;" href="{%url 'signup'%}">Signup</a>
-        <a href="{%url 'shopping' %}" style="float: right; cursor: pointer; height: 1rem;" >&#128717</a>
+        <div style="float: right; cursor: pointer; height: 1rem;">
+          <span id="cart_quantity" style="color: white; font-size: medium; position: absolute; background-color: black; padding: 6px; border-radius: 5rem;">{{cart|length}}</span><a href="{%url 'cart_summary' %}">&#128717</a>
+        </div>
 
       </div>
     
@@ -132,6 +134,12 @@
             <h6>{{obj.description}}</h6>
             <h5 style="opacity: 0.5;">{{obj.category}}</h5>
             <a>{{obj.price}}$</a>
+            <select id="cart_qty" style="border-radius: 0.7rem; width: 2.5rem; font-size: xx-large; font-family: 'Bangers';font-size: 22px;">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
                 <button id="add_cart" value="{{obj.id}}" style="font-family: 'Bangers';font-size: 22px; margin-bottom: 1rem; margin-left: 1rem; border: none; cursor: pointer; padding: 1rem; text-decoration: none; color: white; background-color: #333; margin-top: 1rem; border-radius: 1.5rem;" type="button">Add to Cart</button>
         </div>
         {% empty %}
@@ -147,11 +155,12 @@
       url: '{% url 'cart_add' %}',
       data:{
         obj_id: $('#add_cart').val(),
+        obj_qty: $('#cart_qty option:selected').text(),
         csrfmiddlewaretoken: '{{csrf_token}}',
         action: 'post'
       },
       success: function(json){
-        console.log(json)
+        document.getElementById('cart_quantity').textContent = json.qty
       },
       error: function(xhr, errmsg,err){
       }

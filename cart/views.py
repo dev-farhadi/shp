@@ -2,25 +2,39 @@ from django.shortcuts import render, get_object_or_404
 from .cart import Cart
 from shop.models import Object
 from django.http import JsonResponse
+from django.http import HttpResponse
 
 # Create your views here.
 def cart_summary(request):
-    return render(request, 'cart_summary.html',{})
+    cart =Cart(request)
+    cart_objects = cart.get_objects()
+    cart_quantity = cart.get_quants()
+    return render(request, 'cart_summary.html',{'cart_objects' : cart_objects, 'cart_quantity' : cart_quantity})
 
 def cart_add(request):
     cart = Cart(request)
 
     if request.POST.get('action') == 'post':
         obj_id = int(request.POST.get('obj_id'))
-        object = get_object_or_404(Object, id=obj_id)
-        cart.add(object=object)
+        obj_qty = int(request.POST.get('obj_qty'))
 
-        response = JsonResponse({'object name': object.name})
+        object = get_object_or_404(Object, id=obj_id)
+        cart.add(object=object, quantity=obj_qty)
+
+        cart_quantiy = cart.__len__()
+        response = JsonResponse({'qty' : cart_quantiy})
         return response
 
 
-def cart_delete(request):
-    pass
+def cart_delete(request, prod):
+    product = str(prod)
+    session_data = dict(request.session)
+    print(session_data)
+    if product in session_data:
+        del session_data[product]
+        return HttpResponse('Item deleted from session.')
+    else:
+        return HttpResponse('Item does not exist in session.')
 
 def cart_update(request):
     pass
