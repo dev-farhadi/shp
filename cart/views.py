@@ -3,6 +3,7 @@ from .cart import Cart
 from shop.models import Object
 from django.http import JsonResponse
 from django.http import HttpResponse
+from django.shortcuts import redirect
 
 # Create your views here.
 def cart_summary(request):
@@ -26,15 +27,10 @@ def cart_add(request):
         return response
 
 
-def cart_delete(request, prod):
-    product = str(prod)
-    session_data = dict(request.session)
-    print(session_data)
-    if product in session_data:
-        del session_data[product]
-        return HttpResponse('Item deleted from session.')
-    else:
-        return HttpResponse('Item does not exist in session.')
+def cart_delete(request, param):
+    cart = Cart(request)
+    cart.remove(param)
+    return redirect('cart_summary')
 
 def cart_update(request):
     pass

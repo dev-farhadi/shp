@@ -140,13 +140,12 @@
               {% endif %}
             {% endfor %}
           </h1>
-          <a href="{% url 'cart_delete' product.id %}" style="color: black; text-decoration: none; background-color: rgb(255, 82, 82); padding: 0.5rem; border-radius: 1rem; cursor: pointer;">&#x2716;</a>
+          <a href="{% url 'cart_delete' param=product.id %}" style="color: black; text-decoration: none; background-color: rgb(255, 82, 82); padding: 0.5rem; border-radius: 1rem; cursor: pointer;">&#x2716;</a>
           </div>
           
       
           {%endfor%}
       </div>
-      <a href="" style="font-size: larger; border: none; padding: 1rem; text-decoration: none; color: rgb(248, 59, 59); background-color: #333;">Delete All</a>
       <a href="" style="font-size: larger; border: none; padding: 1rem; text-decoration: none;color: white;background-color: #333;">payment</a>
         
       {% else %}

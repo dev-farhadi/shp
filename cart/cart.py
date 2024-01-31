@@ -21,6 +21,11 @@ class Cart:
 
         self.session.modified = True     
 
+    def remove(self, param):
+        if str(param) in self.cart:
+            del self.cart[str(param)]
+            self.session.modified = True    
+
     def __len__(self):
         return len(self.cart)  
 
