@@ -87,6 +87,7 @@ DATABASES = {
         'PORT': '3306',
     }
 }
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 
 # Password validation

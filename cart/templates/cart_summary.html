@@ -146,7 +146,7 @@
       
           {%endfor%}
       </div>
-      <a href="" style="font-size: larger; border: none; padding: 1rem; text-decoration: none;color: white;background-color: #333;">payment</a>
+      <a href="{% url 'cart_save'%}" style="font-size: larger; border: none; padding: 1rem; text-decoration: none;color: white;background-color: #333;">payment</a>
         
       {% else %}
         <p>Your cart is empty.</p>

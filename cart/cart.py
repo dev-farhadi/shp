@@ -1,4 +1,5 @@
-from shop.models import Object
+from shop.models import Object ,Order
+from django.contrib.auth.models import User
 
 class Cart:
     def __init__(self,request):
@@ -37,3 +38,11 @@ class Cart:
     def get_quants(self):
         quantities = self.cart
         return quantities
+    
+    def save_order(self,request):
+       for key,value in self.cart.items():
+           oi = int(key)
+           object = Object.objects.get(id=oi)
+           order = Order(object_id=object, user_id_id=request.user.id, quantity=value)
+           order.save()
+           self.session.modified = True

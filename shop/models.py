@@ -28,7 +28,7 @@ class Object(models.Model):
     def __str__(self):
         return str(self.name)
     
-class Product_list(models.Model):
+class Order(models.Model):
     id = models.BigAutoField(primary_key=True)
     object_id = models.ForeignKey(Object, on_delete=models.CASCADE)
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
-from .models import Object, Product_list
+from .models import Object, Order
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 # Create your views here.
@@ -24,10 +24,10 @@ def child_obj(request,param):
 
 @login_required
 def shoping(request, obj_id):
-    shop_item = Product_list.objects.filter(user_id__id=request.user.id)
+    shop_item = Order.objects.filter(user_id__id=request.user.id)
     if request.method == 'POST':
         quantity = request.POST.get('quantity')
-        userobject = Product_list(object_id_id=obj_id, quantity=quantity, user_id=request.user)
+        userobject = Order(object_id_id=obj_id, quantity=quantity, user_id=request.user)
         userobject.save()
         return render(request, 'shoping.html', {'shop_item': shop_item})
     else:
@@ -36,25 +36,8 @@ def shoping(request, obj_id):
 
 @login_required    
 def shopping(request):
-   shop_item = Product_list.objects.filter(user_id__id=request.user.id) 
+   shop_item = Order.objects.filter(user_id__id=request.user.id) 
    return render(request, 'shoping.html', {'shop_item': shop_item})
  
-
-@login_required    
-def delete_item(request, param):
-    deleted = Product_list.objects.filter(id=param).delete()
-    shop_item = Product_list.objects.all()
-    return render(request, 'shoping.html', {'shop_item' : shop_item})
-
-
-@login_required
-def delete(request):
-    delete = Product_list.objects.all().delete()
-    return render(request, 'shoping.html')
-
-
-@login_required
-def payment(request):
-    return render(request, 'payment.html')
 
 

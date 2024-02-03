@@ -32,6 +32,9 @@ def cart_delete(request, param):
     cart.remove(param)
     return redirect('cart_summary')
 
-def cart_update(request):
-    pass
+def cart_save(request):
+   cart = Cart(request)
+   cart.save_order(request)
+   request.session.flush()
+   return redirect('home')
 
