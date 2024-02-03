@@ -2,15 +2,225 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Bangers' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 </head>
+<style>
+        body {font-family: 'Bangers';font-size: 22px;}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+  border-radius: 2rem;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+
+.topnav .icon {
+  display: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 17px;    
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: rgb(172, 110, 172);
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 1rem;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.topnav a:hover, .dropdown:hover .dropbtn {
+  background-color: #555;
+  color: white;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.home{
+ width:6rem;
+ background-color: rgb(172, 110, 172) ;
+}
+    .contain{
+    display: flex;
+        justify-content: center;
+}
+.nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0.5rem;
+  overflow: hidden;
+  background-color: #333;
+  width: 70%;
+  border-radius: 1.5rem;
+}
+
+.nav li {
+  float: left;
+}
+
+.nav li:last-child {
+  border-right: none;
+}
+
+.nav li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  border-radius: 2rem;
+}
+
+.nav li a:hover:not(.active) {
+  background-color: #000000;
+}
+.nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    font-size: medium;
+}
+    .helptext{
+        font-size: small;
+        color:rgb(115, 56, 115);
+
+}
+    .signup{
+        display: flex;
+        justify-self: center;
+        align-items: center;
+        flex-direction: column;
+        width: 50%;
+        margin-top: 20rem;
+        background-color: #efb6ff;
+        border-radius: 5rem;
+    }
+
+    form button{
+        font-family: 'Bangers';
+        font-size: 22px;
+        background-color: rgb(115, 56, 115);
+        color: rgb(255, 255, 255);
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom: 3rem;
+        margin-top: 3rem;
+        border-radius: 1rem;
+    }
+    form button:hover{
+        background-color: #fba754;
+    }
+    input[type=text], input[type=password] {
+        width: 100%;
+        height: 2.5rem;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border-radius: 0.8rem;
+        box-sizing: border-box;
+        font-size: medium;
+        background-color: rgb(255, 249, 241);
+}
+</style>
 <body>
+
+    <div class="topnav" id="myTopnav">
+        <a class="home" href="{%url 'home'%}">Home</a>
+        <div class="dropdown">
+          <button class="dropbtn">Digital
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="{% url 'child' param='mobile' %}">Mobile</a>
+            <a href="{% url 'child' param='labtop' %}">Labtop</a>
+          </div>
+        </div> 
+        <div class="dropdown">
+            <button class="dropbtn">Wear 
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="{% url 'child' param='shoe' %}">Shoe</a>
+              <a href="{% url 'child' param='Shirt' %}">Shirt</a>
+              <a href="{% url 'child' param='Pants' %}">Pants</a>
+            </div>
+          </div> 
+          <div class="dropdown">
+            <button class="dropbtn">Home appliances 
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="{% url 'child' param='TV' %}">TV</a>
+            </div>
+          </div> 
+        {% if user.is_authenticated %}
+        <a style="float: right; background-color: rgb(115, 56, 115);" href="{%url 'logout'%}">Logout</a>
+        {% else %}
+        <a style="float: right; background-color: rgb(115, 56, 115);" href="{%url 'login'%}">Login</a>
+        {% endif %}
+        <a style="float: right;" href="{%url 'signup'%}">Signup</a>
+        <div style="float: right; cursor: pointer; height: 1rem;">
+            <span id="cart_quantity" style="color: white; font-size: medium; position: absolute; background-color: black; padding: 6px; border-radius: 5rem;">{{cart|length}}</span><a href="{%url 'cart_summary' %}">&#128717</a>
+          </div>
+
+      </div>
+
+    <div class="contain">
+    <div class="signup" >
     <h2>Login</h2>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Login</button>
 </form>
+    </div>
+    </div>
 </body>
 </html>
