@@ -35,7 +35,6 @@ class Order(models.Model):
 class Order_details(models.Model):  
     id = models.BigAutoField(primary_key=True)
     order_id = models.ForeignKey(Order, on_delete=models.CASCADE, null=True)  
-    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     product_id = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='order_details')
     quantity = models.PositiveIntegerField(default=1)
     product_price = models.DecimalField(max_digits=8, decimal_places=2, null=True)

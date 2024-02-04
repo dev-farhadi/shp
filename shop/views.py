@@ -21,6 +21,10 @@ def child_obj(request,param):
     object = Product.objects.filter(type__type=param)
     return render(request,'child_obj.html', {'object' : object})
 
+def category(request, param):
+    object = Product.objects.filter(category__category=param)
+    return render(request, 'category.html', {'object' : object})
+
 
 @login_required
 def shoping(request, obj_id):

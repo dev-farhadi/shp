@@ -46,7 +46,7 @@ class Cart:
            order_id = Order.objects.latest('id')
            oi = int(key)
            product = Product.objects.get(id=oi)
-           order_details = Order_details(order_id=order_id, user_id_id=request.user.id, product_id=product, quantity=value, product_price=product.price)
+           order_details = Order_details(order_id=order_id, product_id=product, quantity=value, product_price=product.price)
            order_details.save()
            #order = Order(object_id=object, user_id_id=request.user.id, quantity=value)
           # order.save()

@@ -170,46 +170,48 @@
 }
 </style>
 <body>
-    <div class="topnav" id="myTopnav">
-        <a class="home" href="{%url 'home'%}">Home</a>
-        <div class="dropdown">
-          <button class="dropbtn">Digital
-            <i class="fa fa-caret-down"></i>
-          </button>
-          <div class="dropdown-content">
-            <a href="{% url 'child' param='mobile' %}">Mobile</a>
-            <a href="{% url 'child' param='labtop' %}">Labtop</a>
-          </div>
-        </div> 
-        <div class="dropdown">
-            <button class="dropbtn">Wear 
-              <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-content">
-              <a href="{% url 'child' param='shoe' %}">Shoe</a>
-              <a href="{% url 'child' param='Shirt' %}">Shirt</a>
-              <a href="{% url 'child' param='Pants' %}">Pants</a>
-            </div>
-          </div> 
-          <div class="dropdown">
-            <button class="dropbtn">Home appliances 
-              <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-content">
-              <a href="{% url 'child' param='TV' %}">TV</a>
-            </div>
-          </div> 
-        {% if user.is_authenticated %}
-        <a style="float: right; background-color: rgb(115, 56, 115);" href="{%url 'logout'%}">Logout</a>
-        {% else %}
-        <a style="float: right; background-color: rgb(115, 56, 115);" href="{%url 'login'%}">Login</a>
-        {% endif %}
-        <a style="float: right;" href="{%url 'signup'%}">Signup</a>
-        <div style="float: right; cursor: pointer; height: 1rem;">
-            <span id="cart_quantity" style="color: white; font-size: medium; position: absolute; background-color: rgb(191, 124, 247); padding: 6px; border-radius: 5rem;">{{cart|length}}</span><a href="{%url 'cart_summary' %}">&#128717</a>
-          </div>
-
+  <div class="topnav" id="myTopnav">
+    <a class="home" href="{%url 'home'%}">Home</a>
+    <div class="dropdown">
+      <button class="dropbtn">
+        <a style=" padding: 0;" href="{% url 'category' param='digital'%}">Digital</a>
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <a href="{% url 'child' param='mobile' %}">Mobile</a>
+        <a href="{% url 'child' param='labtop' %}">Labtop</a>
       </div>
+    </div> 
+    <div class="dropdown">
+        <button class="dropbtn"> <a style=" padding: 0;" href="{% url 'category' param='wear'%}">Wear</a>
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="{% url 'child' param='shoe' %}">Shoe</a>
+          <a href="{% url 'child' param='Shirt' %}">Shirt</a>
+          <a href="{% url 'child' param='Pants' %}">Pants</a>
+        </div>
+      </div> 
+      <div class="dropdown">
+        <button class="dropbtn"> <a style=" padding: 0;" href="{% url 'category' param='Home appliances'%}">Home appliances</a>
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="{% url 'child' param='TV' %}">TV</a>
+        </div>
+      </div> 
+    {% if user.is_authenticated %}
+    <a style="float: right; background-color: rgb(115, 56, 115);" href="{%url 'logout'%}">Logout</a>
+    {% else %}
+    <a style="float: right; background-color: rgb(115, 56, 115);" href="{%url 'login'%}">Login</a>
+    {% endif %}
+    <a style="float: right;" href="{%url 'signup'%}">Signup</a>
+    <div style="float: right; cursor: pointer; height: 1rem;">
+      <span id="cart_quantity" style="color: white; font-size: medium; position: absolute; background-color: rgb(191, 124, 247); padding: 6px; border-radius: 5rem;">{{cart|length}}</span><a href="{%url 'cart_summary' %}">&#128717</a>
+    </div>
+    
+
+  </div>
 
 
       <div class="contain">
