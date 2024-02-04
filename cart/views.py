@@ -1,9 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from .cart import Cart
-from shop.models import Object
+from shop.models import Product
 from django.http import JsonResponse
 from django.http import HttpResponse
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def cart_summary(request):
@@ -19,7 +20,7 @@ def cart_add(request):
         obj_id = int(request.POST.get('obj_id'))
         obj_qty = int(request.POST.get('obj_qty'))
 
-        object = get_object_or_404(Object, id=obj_id)
+        object = get_object_or_404(Product, id=obj_id)
         cart.add(object=object, quantity=obj_qty)
 
         cart_quantiy = cart.__len__()
@@ -32,6 +33,8 @@ def cart_delete(request, param):
     cart.remove(param)
     return redirect('cart_summary')
 
+
+@login_required
 def cart_save(request):
    cart = Cart(request)
    cart.save_order(request)

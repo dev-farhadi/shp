@@ -1,4 +1,4 @@
-from shop.models import Object ,Order
+from shop.models import Product ,Order, Order_details
 from django.contrib.auth.models import User
 
 class Cart:
@@ -32,7 +32,7 @@ class Cart:
 
     def get_objects(self):
         objects_ids = self.cart.keys()
-        objects =  Object.objects.filter(id__in=objects_ids)
+        objects =  Product.objects.filter(id__in=objects_ids)
         return objects
     
     def get_quants(self):
@@ -40,9 +40,14 @@ class Cart:
         return quantities
     
     def save_order(self,request):
+       order = Order(user_id_id=request.user.id)
+       order.save()
        for key,value in self.cart.items():
+           order_id = Order.objects.latest('id')
            oi = int(key)
-           object = Object.objects.get(id=oi)
-           order = Order(object_id=object, user_id_id=request.user.id, quantity=value)
-           order.save()
+           product = Product.objects.get(id=oi)
+           order_details = Order_details(order_id=order_id, user_id_id=request.user.id, product_id=product, quantity=value, product_price=product.price)
+           order_details.save()
+           #order = Order(object_id=object, user_id_id=request.user.id, quantity=value)
+          # order.save()
            self.session.modified = True

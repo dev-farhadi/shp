@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
-from .models import Object, Order
+from .models import Product, Order
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 # Create your views here.
 def home(request):
-    object = Object.objects.order_by('-id')[:5]
+    object = Product.objects.order_by('-id')[:5]
     paginator = Paginator(object, 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -13,12 +13,12 @@ def home(request):
 
 
 def object(request,oi):
-    object = Object.objects.filter(id=oi)
+    object = Product.objects.filter(id=oi)
     return render(request, 'object.html', {'object' : object})
 
 
 def child_obj(request,param):
-    object = Object.objects.filter(type__type=param)
+    object = Product.objects.filter(type__type=param)
     return render(request,'child_obj.html', {'object' : object})
 
 

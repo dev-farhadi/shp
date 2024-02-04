@@ -122,7 +122,7 @@
         {% endif %}
         <a style="float: right;" href="{%url 'signup'%}">Signup</a>
         <div style="float: right; cursor: pointer; height: 1rem;">
-          <span id="cart_quantity" style="color: white; font-size: medium; position: absolute; background-color: black; padding: 6px; border-radius: 5rem;">{{cart|length}}</span><a href="{%url 'cart_summary' %}">&#128717</a>
+          <span id="cart_quantity" style="color: white; font-size: medium; position: absolute; background-color: rgb(191, 124, 247); padding: 6px; border-radius: 5rem;">{{cart|length}}</span><a href="{%url 'cart_summary' %}">&#128717</a>
         </div>
         
 
@@ -132,7 +132,7 @@
         <div class="object" style="border-radius: 1rem; width: 20%; color:white; background-color: rgb(115, 56, 115); margin: 2rem; display: flex;justify-content: center; flex-direction: column; padding: 2rem; align-items: center;">
             <h3>{{obj.name}}</h3>
             <h5>{{obj.category}}</h5>
-            <a>{{obj.price}}$</a>
+            <a>${{obj.price}}</a>
             <a style="padding: 1rem; text-decoration: none; color: white; background-color: #333; margin-top: 1rem; border-radius: 1.5rem;" href="{%url 'object' obj.id%}">Show</a>
 
         </div>
