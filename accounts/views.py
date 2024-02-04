@@ -2,9 +2,6 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponseRedirect
-import time
-from django.contrib import messages
 
 def signup(request):
     if request.method == 'POST':

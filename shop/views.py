@@ -11,9 +11,9 @@ def home(request):
     return render(request, 'home.html' ,{'page_obj' : page_obj})
 
 
-def object(request,oi):
+def product(request,oi):
     object = Product.objects.filter(id=oi)
-    return render(request, 'object.html', {'object' : object})
+    return render(request, 'product.html', {'object' : object})
 
 
 def products_type(request,param):
