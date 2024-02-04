@@ -17,31 +17,19 @@ def object(request,oi):
     return render(request, 'object.html', {'object' : object})
 
 
-def child_obj(request,param):
+def products_type(request,param):
     object = Product.objects.filter(type__type=param)
-    return render(request,'child_obj.html', {'object' : object})
+    paginator = Paginator(object, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request,'products_type.html', {'page_obj' : page_obj})
 
 def category(request, param):
     object = Product.objects.filter(category__category=param)
-    return render(request, 'category.html', {'object' : object})
-
-
-@login_required
-def shoping(request, obj_id):
-    shop_item = Order.objects.filter(user_id__id=request.user.id)
-    if request.method == 'POST':
-        quantity = request.POST.get('quantity')
-        userobject = Order(object_id_id=obj_id, quantity=quantity, user_id=request.user)
-        userobject.save()
-        return render(request, 'shoping.html', {'shop_item': shop_item})
-    else:
-        return render(request, 'shoping.html', {'shop_item': shop_item})
-    
-
-@login_required    
-def shopping(request):
-   shop_item = Order.objects.filter(user_id__id=request.user.id) 
-   return render(request, 'shoping.html', {'shop_item': shop_item})
+    paginator = Paginator(object, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'category.html', {'page_obj' : page_obj})
  
 
 

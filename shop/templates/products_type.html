@@ -127,7 +127,7 @@
 
   </div>
     <div style="display: flex; justify-content: center; ">
-        {% for obj in object %}
+        {% for obj in page_obj %}
         <div class="object" style="border-radius: 1rem; width: 20%; color:white; background-color: rgb(115, 56, 115); margin: 2rem; display: flex;justify-content: center; flex-direction: column; padding: 2rem; align-items: center;">
             <h3>{{obj.name}}</h3>
             <h5>{{obj.category}}</h5>
@@ -138,6 +138,14 @@
         {% empty %}
         <h1>Not Found.</h1>
         {% endfor %}
+      </div>
+      <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Next</a>
+        {% endif %}
       </div>
 </body>
 </html>
