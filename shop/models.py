@@ -40,6 +40,12 @@ class Order_details(models.Model):
     product_price = models.DecimalField(max_digits=8, decimal_places=2, null=True)
 
 
+class Product_prices(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    product_id = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="prod_id")
+    product_price = models.DecimalField(max_digits=8, decimal_places=2, null=True)
+
+
 
 
 
